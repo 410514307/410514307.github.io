@@ -14,48 +14,48 @@
             this.loading = this.container.querySelector('.search__loader');
             this.tpl = [
                 '<h2 class="search__result-wrap">',
-                    this.config.language == 'en'?'Find <em></em>  <em></em>':'找到匹配<em></em>的结果<em></em>条',
+                    this.config.language == 'en'?'Find <em>{{ num }}</em> {{ enDescription }} <em>{{ query }}</em>':'找到匹配<em>{{ query }}</em>的结果<em>{{ num }}</em>条',
                 '</h2>',
                 '<div class="page__posts clearfix">',
-                    '',
+                    '{{ posts }}',
                 '</div>'
             ].join('');
             this.articleTpl = [
                 '<div class="page__post">',
                     '<article itemscope itemtype="http://schema.org/Article" class="page__mini-article">',
                         '<div class="mini-article__cover">',
-                            '<img itemprop="image" src="" alt=""/>',
-                            '<div itemprop="datePublished" content="1589140441675" class="mini-article__date">',
-                                '<span class="date__day"></span>',
-                                '<span class="date__month"></span>',
+                            '<img itemprop="image" src="{{ cover }}" alt="{{ title }}"/>',
+                            '<div itemprop="datePublished" content="{{ date }}" class="mini-article__date">',
+                                '<span class="date__day">{{ day }}</span>',
+                                '<span class="date__month">{{ month }}</span>',
                             '</div>',
-                            '<a itemprop="url" class="iconfont icon-enter" href=""></a>',
+                            '<a itemprop="url" class="iconfont icon-enter" href="{{ url }}"></a>',
                         '</div>',
                         '<div class="mini-article__info">',
                             '<h3 itemprop="name" class="mini-article__title">',
-                                '<a itemprop="url" href="" title=""></a>',
+                                '<a itemprop="url" href="{{ url }}" title="{{ title }}">{{ title }}</a>',
                             '</h3>',
                             '<p class="mini-article__author">by ',
                                 '<span itemprop="author" itemscope itemtype="http://schema.org/Person">',
-                                    '<a itemprop="url" href="" target="_blank">',
-                                        '<span itemprop="name"></span>',
+                                    '<a itemprop="url" href="{{ authorLink }}" target="_blank">',
+                                        '<span itemprop="name">{{ authorNick }}</span>',
                                     '</a>',
                                 '</span>',
                             '</p>',
                             '<p itemprop="articleSection" class="min-article__desc">',
-                                '',
+                                '{{ desc }}',
                             '</p>',
                             '<div class="min-article__tags">',
                                 '<i class="iconfont icon-tab"></i>',
                                 '<ul class="tags__list clearfix">',
-                                    '',
+                                    '{{ tagsHtml }}',
                                 '</ul>',
                             '</div>',
                         '</div>',
                     '</article>',
                 '</div>'
             ].join('');
-            this.tagsTpl = '<li class="tags__item"><a href="js/page/search.js"></a></li>';
+            this.tagsTpl = '<li class="tags__item"><a href="{{ path }}">{{ name }}</a></li>';
             this.queryString = decodeURIComponent(location.search.split('=')[1]);
             this.getData();
         },
